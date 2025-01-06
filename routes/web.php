@@ -12,4 +12,4 @@ Route::get('/contracts', [ContractController::class, 'index'])->name('contracts.
 Route::get('/contracts/create', [ContractController::class, 'create'])->name('contracts.create');
 Route::post('/contracts', [ContractController::class, 'store'])->name('contracts.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/contracts/{id}/pdf', [ContractController::class, 'downloadPDF'])->name('contracts.pdf');
+// Route::get('/contracts/{id}/pdf', [ContractController::class, 'downloadPDF'])->name('contracts.pdf');

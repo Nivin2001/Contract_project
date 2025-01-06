@@ -23,7 +23,8 @@ $remaining_amount = $total_value - $paid_amount;
         </form>
 
         <button>طباعة</button>
-        <button onclick="window.location.href='{{ route('contracts.pdf', ['id' => $contract->id]) }}'" class="btn btn-primary">PDF</button>
+        <button>pdf</button>
+        {{-- <button onclick="window.location.href='{{ route('contracts.pdf', ['id' => $contract->id]) }}'" class="btn btn-primary">PDF</button> --}}
         <button>إضافة / تعديل</button>
       </div>
     </div>

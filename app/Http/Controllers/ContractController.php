@@ -62,17 +62,17 @@ class ContractController extends Controller
         ]);
         $remaining_amount = $request->total_value - $request->paid_amount;
         $validated['remaining_amount'] = $remaining_amount;
-        Contract::create($validated);
+        Contract::create($request->all());
         return redirect()->route('contracts.index')->with('success', 'تم إضافة العقد بنجاح!');
         // return redirect()->route('contracts.pdf', ['id' => $contract->id]);
     }
 
-    public function downloadPDF($id)
-    {
-        $contract = Contract::findOrFail($id);
-        $pdf = PDF::loadView('contracts.pdf', compact('contract'));
-        return $pdf->download('contract-' . $contract->contract_number . '.pdf');
-    }
+    // public function downloadPDF($id)
+    // {
+    //     $contract = Contract::findOrFail($id);
+    //     $pdf = PDF::loadView('contracts.pdf', compact('contract'));
+    //     return $pdf->download('contract-' . $contract->contract_number . '.pdf');
+    // }
     /**
      * Display the specified resource.
      */
