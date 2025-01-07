@@ -31,20 +31,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($contracts as $contract)
-                    <tr>
-                        <td>{{ $contract->contract_number }}</td>
-                        <td>{{ $contract->contract_date }}</td>
-                        <td>{{ $contract->party1->name }}</td>
-                        <td>{{ $contract->party2->name }}</td>
-                        <td>{{ $contract->total_value }}</td>
-                        <td>{{ $contract->paid_amount }}</td>
-                        <td>{{ $contract->remaining_amount }}</td>
-                        <td>
-                         
-                        </td>
-                    </tr>
-                @endforeach
+               
+                    @foreach ($contracts as $contract)
+                        <tr>
+                            <td>{{ $contract->contract_number }}</td>
+                            <td>{{ $contract->contract_date }}</td>
+                            <td>{{ $contract->party1 ? $contract->party1->name : 'غير محدد' }}</td>
+                            <td>{{ $contract->party2 ? $contract->party2->name : 'غير محدد' }}</td>
+                            <td>{{ $contract->total_value }}</td>
+                            <td>{{ $contract->paid_amount }}</td>
+                            <td>{{ $contract->remaining_amount }}</td>
+                            <td>
+                            </td>
+                        </tr>
+                    @endforeach
+
+
             </tbody>
         </table>
     </div>

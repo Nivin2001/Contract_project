@@ -47,13 +47,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function contractsAsParty1()
-    {
-        return $this->hasMany(Contract::class, 'party_1');
-    }
-
-    public function contractsAsParty2()
-    {
-        return $this->hasMany(Contract::class, 'party_2');
-    }
+ 
 }

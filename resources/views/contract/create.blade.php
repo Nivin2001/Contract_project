@@ -1,8 +1,4 @@
-<?php
-$total_value = old('total_value', $contract->total_value ?? 0);
-$paid_amount = old('paid_amount', $contract->paid_amount ?? 0);
-$remaining_amount = $total_value - $paid_amount;
-?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -167,7 +163,7 @@ $remaining_amount = $total_value - $paid_amount;
             </thead>
             <tbody>
               <tr>
-                <td>01/01/2025</td>
+                <td>{{$contract->start_date}}</td>
                 <td>{{ $paid_amount }}</td>
               </tr>
               <tr>

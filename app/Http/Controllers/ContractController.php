@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contract;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -37,7 +38,11 @@ class ContractController extends Controller
     {
         $users = User::all();
         $contract = new Contract();
-        return view('contract.create', compact('users', 'contract'));
+        $total_value = old('total_value', $contract->total_value ?? 0);
+        $paid_amount = old('paid_amount', $contract->paid_amount ?? 0);
+        $remaining_amount = $total_value - $paid_amount;
+
+        return view('contract.create', compact('users', 'contract', 'total_value', 'paid_amount', 'remaining_amount'));
     }
 
 
@@ -45,27 +50,66 @@ class ContractController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+{
+    // التحقق من صحة البيانات المدخلة
+    $validated = $request->validate([
+        'contract_number' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'contract_date' => 'required|date',
+        'representative_1' => 'required|string|max:255',
+        'phone_1' => 'required|string|max:255',
+        'guarantor_2' => 'required|string|max:255',
+        'city_2' => 'required|string|max:255',
+        'neighborhood' => 'required|string|max:255',
+        'phone_2' => 'required|string|max:255',
+        'implementation' => 'required|string|max:255',
+        'wood_type' => 'required|string|max:255',
+        'column_cladding' => 'required|string|max:255',
+        'total_area' => 'required|numeric',
+        'price_per_square_meter' => 'required|numeric',
+        'work_duration' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'price_quote_number' => 'required|string|max:255',
+        'quote_city' => 'required|string|max:255',
+        'notes' => 'nullable|string',
+    ]);
 
-        $validated = $request->validate([
-            'party_1' => 'required|exists:users,id',
-            'party_2' => 'required|exists:users,id',
-            'contract_number' => 'required|unique:contracts,contract_number',
-            'contract_date' => 'required|date',
-            'contract_address' => 'required|string',
-            'wood_type' => 'required|string',
-            'column_cladding' => 'required|string',
-            'total_value' => 'required|numeric',
-            'paid_amount' => 'required|numeric',
-            'work_duration' => 'required|integer',
-            'price_quote_number' => 'required|string',
-        ]);
-        $remaining_amount = $request->total_value - $request->paid_amount;
-        $validated['remaining_amount'] = $remaining_amount;
-        Contract::create($request->all());
-        return redirect()->route('contracts.index')->with('success', 'تم إضافة العقد بنجاح!');
-        // return redirect()->route('contracts.pdf', ['id' => $contract->id]);
-    }
+    // حساب المبالغ
+    $total_value = $request->total_value; // القيمة الإجمالية من النموذج
+    $paid_amount = $request->paid_amount; // المبلغ المدفوع من النموذج
+    $remaining_amount = $total_value - $paid_amount; // المبلغ المتبقي
+
+    // تخزين البيانات
+    $contract = new Contract();
+    $contract->contract_number = $request->contract_number;
+    $contract->city = $request->city;
+    $contract->contract_date = $request->contract_date;
+    $contract->representative_1 = $request->representative_1;
+    $contract->phone_1 = $request->phone_1;
+    $contract->guarantor_2 = $request->guarantor_2;
+    $contract->city_2 = $request->city_2;
+    $contract->neighborhood = $request->neighborhood;
+    $contract->phone_2 = $request->phone_2;
+    $contract->implementation = $request->implementation;
+    $contract->wood_type = $request->wood_type;
+    $contract->column_cladding = $request->column_cladding;
+    $contract->total_area = $request->total_area;
+    $contract->price_per_square_meter = $request->price_per_square_meter;
+    $contract->total_value = $total_value;
+    $contract->paid_amount = $paid_amount;
+    $contract->remaining_amount = $remaining_amount;
+    $contract->work_duration = $request->work_duration;
+    $contract->start_date = $request->start_date;
+    $contract->price_quote_number = $request->price_quote_number;
+    $contract->quote_city = $request->quote_city;
+    $contract->notes = $request->notes;
+    $contract->save(); // حفظ العقد في قاعدة البيانات
+
+    // إعادة توجيه المستخدم بعد الحفظ مع رسالة تأكيد
+    return redirect()->route('contracts.index', $contract->id)->with('success', 'تم حفظ العقد بنجاح!');
+}
+
+
 
     // public function downloadPDF($id)
     // {
