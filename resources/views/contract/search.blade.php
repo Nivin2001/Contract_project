@@ -1,35 +1,63 @@
 
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>العقود السابقة</title>
-    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
+    <title>استعلام العقود</title>
+    <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
 
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="search-bar">
-                <form action="{{ route('contracts.search') }}" method="GET" style="display: flex;">
-                    <input type="text" name="query" placeholder="ابحث عن عقد..." required>
-                    <button type="submit">🔍</button>
-                </form>
-            </div>
-            <h1>العقود السابقة</h1>
-            <div>
-                <button onclick="window.location.href='{{ route('contracts.create') }}'">إضافة عقد جديد</button>
+
+        <!-- شريط العنوان -->
+        <div class="header-bar">
+            <div class="title">استعلام</div>
+            <div class="buttons">
+                <button onclick="generatePDF()">PDF</button>
                 <button onclick="printPage()">طباعة</button>
-                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit">خروج</button>
+                    <button type="submit" class="btn btn-danger">خروج</button>
                 </form>
             </div>
         </div>
 
+        <!-- شريط البحث -->
+        <div class="search-bar">
+            <form action="{{ route('contracts.search') }}" method="GET" style="display: flex; flex-wrap: wrap; gap: 10px;">
+
+                <div>
+                    <label>الاسم:</label>
+                    <select name="name" >
+                        <option value="">اختر الاسم</option>
+                        @foreach($names as $name)
+                            <option value="{{ $name }}">{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label>رقم عرض السعر:</label>
+                    <input type="text" name="price_quote_number">
+                </div>
+                <div>
+                    <label>تاريخ من:</label>
+                    <input type="date" name="contract_from_date">
+                </div>
+
+                <div>
+                    <label>تاريخ إلى:</label>
+                    <input type="date" name="contract_to_date">
+                </div>
+
+                <div>
+                    <button type="submit">🔍</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- الجدول -->
         <table>
             <thead>
                 <tr>
@@ -80,6 +108,7 @@
             <p>إجمالي المتبقي: {{ $contracts->sum('remaining_amount') }} ريال</p>
         </div>
     </div>
+
     @include('partials.script')
 </body>
 </html>

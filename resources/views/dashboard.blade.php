@@ -142,7 +142,7 @@
                 </a>
             </div>
             <div class="option-card">
-                <a href="{{ route('contracts.index') }}" style="text-decoration: none; color: white;">
+                <a href="{{ route('contracts.search') }}" style="text-decoration: none; color: white;">
                     <img src="https://via.placeholder.com/80" alt="استعلام">
                     <h3>استعلام</h3>
                 </a>

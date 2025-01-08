@@ -1,0 +1,142 @@
+
+
+
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #1e3f57;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #207567;
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+th {
+    background-color: #0d3c55;
+}
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-bar .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.header-bar .buttons button {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.header-bar .buttons button:hover {
+    background-color: #d35400;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-bar input, .search-bar select {
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #3498db; /* تم تغيير اللون هنا */
+    color: #fff;
+}
+
+
+.search-bar button {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-bar button:hover {
+    background-color: #d35400;
+}
+
+.actions button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.actions button:hover {
+    background-color: #2980b9;
+}
+
+.totals {
+    margin-top: 20px;
+    background-color: #0d3c55;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: right;
+    color: #fff;
+}
+
+.totals p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+select {
+    font-size: 1.2em;
+    padding: 10px;
+    width: 250px;    
+}
+
+@media (max-width: 768px) {
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar input, .search-bar select, .search-bar button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-bar .buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+}
