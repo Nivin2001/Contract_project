@@ -1,9 +1,9 @@
 <script>
 
-function generatePDF(contractId) {
-    window.location.href = "{{ route('contracts.downloadPdf', ['id' => '__contract_id__']) }}".replace('__contract_id__', contractId);
-}
+    function generatePDF() {
 
+        window.location.href = "{{ route('generate.pdf') }}";
+    }
 
     function printPage() {
         window.print();

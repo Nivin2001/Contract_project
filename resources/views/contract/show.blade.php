@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -113,10 +114,11 @@
             <p>Industrial License No: 411223494</p>
         </div>
     </header>
-    @foreach ($contracts as $contract)
+
+
     <section class="content-section">
         <h2>اتفاقية تنفيذ العمل</h2>
-        <p><strong>{{ $contract->contract_number }}</strong></p>
+        {{-- <p><strong>{{ $contract->contract_number }}</strong></p> --}}
         <p>بعون الله وتوفيقه تم الاتفاق بمدينة <strong>{{ $contract->city }}</strong> في يوم <strong>{{ $contract->contract_date }}</strong> والموافق <strong>{{ $contract->contract_date }}</strong> بين كل من:</p>
         <ul>
             <li><strong>الطرف الأول:</strong> مصنع السواتر للبلاستيك، ومقره الرياض، جوال رقم: 0554472017.</li>
@@ -137,8 +139,8 @@
     <section class="content-section">
         <h3>ثانيًا:</h3>
         <ul>
-            <li>الأخشاب المستخدمة بمقاس: <strong>{{ $contract->wood_type }}</strong>.</li>
-            <li>لون الأخشاب: بيج.</li>
+            <li>الأخشاب المستخدمة بمقاس: 5 سم.</li>
+            <li>لون الأخشاب: <strong>{{ $contract->wood_type }}</strong></li>
         </ul>
     </section>
 
@@ -232,6 +234,7 @@
         <p>رقم الهاتف: 0554472017</p>
         <p>البريد الإلكتروني: info@swatir.com</p>
     </section>
-    @endforeach
 </body>
 </html>
+
+    <a href="{{ route('generate.pdf', $contract->id) }}" class="btn btn-primary">تحميل التقرير</a>

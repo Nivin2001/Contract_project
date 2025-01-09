@@ -70,7 +70,7 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-   
+        // التحقق من صحة المدخلات الخاصة بالعقد
         $validated = $request->validate([
             'contract_number' => 'required|string|max:255',
             'city' => 'required|string|max:255',
@@ -133,22 +133,23 @@ class ContractController extends Controller
 
         return redirect()->route('contracts.index')->with('success', 'تم حفظ العقد بنجاح!');
     }
-    public function generatePdf($id)
+    public function show(Contract $contract)
     {
-        $contract = Contract::findOrFail($id);
 
-        $pdf = PDF::loadView('pdf.contracts', compact('contract'));
-        return $pdf->download('contract_' . $contract->contract_number . '_report.pdf');
+        return view('contract.show', compact('contract'));
+    }
+
+    public function generatePdf()
+    {
+        $contracts = Contract::all();
+        $pdf = PDF::loadView('pdf.contracts', compact('contracts'));
+
+        return $pdf->download('contracts_report.pdf');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Contract $contract)
-    {
-        //
-
-    }
 
     /**
      * Show the form for editing the specified resource.

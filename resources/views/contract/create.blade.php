@@ -17,7 +17,7 @@
             @csrf
             <button type="submit" class="btn btn-danger">خروج</button>
         </form>
-        <button onclick="generatePDF({{ $contract->id }})">PDF</button>
+        <button onclick="window.location.href = '{{ route('generate.pdf') }}'">PDF</button>
         <button onclick="printPage()">طباعة</button>
         <button>إضافة / تعديل</button>
       </div>
