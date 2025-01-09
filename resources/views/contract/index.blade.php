@@ -80,6 +80,6 @@
             <p>إجمالي المتبقي: {{ $contracts->sum('remaining_amount') }} ريال</p>
         </div>
     </div>
-    @include('partials.script')
+    {{-- @include('partials.script') --}}
 </body>
 </html>

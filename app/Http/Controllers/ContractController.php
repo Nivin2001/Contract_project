@@ -127,18 +127,18 @@ class ContractController extends Controller
                 'amount_paid' => $paid_amount,
             ]);
         }
-          
+
     $pdf = PDF::loadView('pdf.contracts', compact('contract'));
     return $pdf->download('contract_' . $contract->contract_number . '_report.pdf');
 
         return redirect()->route('contracts.index')->with('success', 'تم حفظ العقد بنجاح!');
     }
-    public function generatePdf()
+    public function generatePdf($id)
     {
-        $contracts = Contract::all();
+        $contract = Contract::findOrFail($id);
 
-        $pdf = PDF::loadView('pdf.contracts', compact('contracts'));
-        return $pdf->download('contracts_report.pdf');
+        $pdf = PDF::loadView('pdf.contracts', compact('contract'));
+        return $pdf->download('contract_' . $contract->contract_number . '_report.pdf');
     }
 
     /**
