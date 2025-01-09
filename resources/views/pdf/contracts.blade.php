@@ -171,7 +171,7 @@
     </section>
 
     <section>
-        <a href="{{ route('generate.pdf') }}" class="btn btn-primary">تحميل PDF</a>
+        <a href="{{ route('contracts.downloadPdf', $contract->id) }}">Download PDF</a>
     </section>
 </body>
 </html>

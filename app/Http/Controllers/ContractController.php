@@ -70,7 +70,7 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        // التحقق من صحة المدخلات الخاصة بالعقد
+   
         $validated = $request->validate([
             'contract_number' => 'required|string|max:255',
             'city' => 'required|string|max:255',
