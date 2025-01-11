@@ -7,7 +7,13 @@
   <title>تعديل العقد</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <body>
+
   <div class="container">
     <!-- Header -->
     <div class="header">

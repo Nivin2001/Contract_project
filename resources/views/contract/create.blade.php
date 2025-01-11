@@ -17,7 +17,10 @@
             @csrf
             <button type="submit" class="btn btn-danger">خروج</button>
         </form>
-        <button onclick="window.location.href = '{{ route('generate.pdf') }}'">PDF</button>
+        <form action="{{ route('contracts.generatePdf', ['contractId' => $contract->pluck('id')->implode(',')]) }}" method="GET" style="display: inline;">
+            @csrf
+            <button type="submit">PDF</button>
+        </form>
         <button onclick="printPage()">طباعة</button>
         <button>إضافة / تعديل</button>
       </div>
@@ -31,11 +34,10 @@
           <label>رقم العقد:</label>
           <input type="text" name="contract_number" value="{{ old('contract_number', $contract->contract_number ?? '') }}" required>
         </div>
-
         <div>
-          <label>تم الاتفاق بمدينة:</label>
-          <input type="text" name="city" value="{{ old('city', $contract->city ?? '') }}" required>
-        </div>
+            <label>تم الاتفاق بمدينة:</label>
+            <input type="text" name="city" value="{{ old('city') }}" required>
+          </div>
 
         <div>
           <label>في يوم:</label>

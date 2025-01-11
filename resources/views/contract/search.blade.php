@@ -10,20 +10,22 @@
 </head>
 <body>
     <div class="container">
-
-        <!-- شريط العنوان -->
-        <div class="header-bar">
-            <div class="title">استعلام</div>
-            <div class="buttons">
-                <button onclick="generatePDF()">PDF</button>
-                <button onclick="printPage()">طباعة</button>
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">خروج</button>
-                </form>
-            </div>
-        </div>
-
+           <!-- شريط العنوان -->
+<div class="header-bar">
+    <div class="title">استعلام</div>
+    <div class="buttons">
+        <form action="{{ route('contracts.generatePdf', ['contractId' => $contracts->pluck('id')->implode(',')]) }}" method="GET" style="display: inline;">
+            @csrf
+            <button type="submit">PDF</button>
+        </form>
+ 
+        <button onclick="printPage()">طباعة</button>
+        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-danger">خروج</button>
+        </form>
+    </div>
+</div>
         <!-- شريط البحث -->
         <div class="search-bar">
             <form action="{{ route('contracts.search') }}" method="GET" style="display: flex; flex-wrap: wrap; gap: 10px;">
@@ -109,6 +111,6 @@
         </div>
     </div>
 
-    @include('partials.script')
+  @include('partials.script')
 </body>
 </html>

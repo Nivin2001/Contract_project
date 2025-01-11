@@ -1,9 +1,8 @@
 <script>
 
-    function generatePDF() {
-
-        window.location.href = "{{ route('generate.pdf') }}";
-    }
+function generatePDF(url) {
+    window.location.href = url;  // هذا سيقوم بتوجيه المستخدم إلى الرابط المولد
+}
 
     function printPage() {
         window.print();

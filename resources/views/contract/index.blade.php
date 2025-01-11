@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -10,6 +8,12 @@
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 
 </head>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <body>
     <div class="container">
         <div class="header">
@@ -23,12 +27,18 @@
             <div>
                 <button onclick="window.location.href='{{ route('contracts.create') }}'">إضافة عقد جديد</button>
                 <button onclick="printPage()">طباعة</button>
+                <form action="{{ route('contracts.generatePdf', ['contractId' => $contracts->pluck('id')->implode(',')]) }}" method="GET" style="display: inline;">
+                    @csrf
+                    <button type="submit">PDF</button>
+                </form>
                 <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                     @csrf
                     <button type="submit">خروج</button>
                 </form>
             </div>
         </div>
+
+
 
         <table>
             <thead>

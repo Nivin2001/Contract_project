@@ -105,7 +105,7 @@
             <p>ترخيص صناعي رقم: 411223494</p>
         </div>
         <div class="logo">
-            <img src="logo.png" alt="Swatir Factory Logo">
+            <img src="{{ asset('images/logo.JPG') }}" alt="Swatir Factory Logo">
         </div>
         <div class="header-left">
             <h1>Swatir Factory</h1>
@@ -114,6 +114,7 @@
         </div>
     </header>
     @foreach ($contracts as $contract)
+    @if($contract && is_object($contract))
     <section class="content-section">
         <h2>اتفاقية تنفيذ العمل</h2>
         <p><strong>{{ $contract->contract_number }}</strong></p>
@@ -232,6 +233,8 @@
         <p>رقم الهاتف: 0554472017</p>
         <p>البريد الإلكتروني: info@swatir.com</p>
     </section>
+    @endif
     @endforeach
+
 </body>
 </html>
