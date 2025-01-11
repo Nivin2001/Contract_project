@@ -21,7 +21,7 @@ class ContractController extends Controller
     public function index()
     {
 
-        $contracts = Contract::all();
+        $contracts= Contract::all();
 
         return view('contract.index', compact('contracts'));
     }
@@ -170,7 +170,7 @@ class ContractController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // التحقق من صحة المدخلات
+
         $validated = $request->validate([
             'contract_number' => 'required|string|max:255',
             'city' => 'required|string|max:255',
